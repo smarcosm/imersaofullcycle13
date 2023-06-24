@@ -31,45 +31,4 @@ export class WalletAssetsService {
       },
     });
   }
-
-  // subscribeEvents(wallet_id: string): Observable<{
-  //   event: 'wallet-asset-updated';
-  //   data: WalletAsset;
-  // }> {
-  //   return new Observable((observer) => {
-  //     this.walletAssetModel
-  //       .watch(
-  //         [
-  //           {
-  //             $match: {
-  //               operationType: 'update',
-  //               'fullDocument.wallet_id': wallet_id,
-  //             },
-  //           },
-  //         ],
-  //         { fullDocument: 'updateLookup' },
-  //       )
-  //       .on('change', async (data) => {
-  //         console.log(data);
-  //         const walletAsset = await this.prismaService.walletAsset.findUnique({
-  //           where: {
-  //             id: data.fullDocument._id + '',
-  //           },
-  //         });
-  //         observer.next({
-  //           event: 'wallet-asset-updated',
-  //           data: walletAsset,
-  //         });
-  //       });
-  //   });
-
-  // return this.prismaService.$subscribe.walletAsset({
-  //   where: {
-  //     mutation_in: ['CREATED', 'UPDATED', 'DELETED'],
-  //     node: {
-  //       wallet_id,
-  //     },
-  //   },
-  // });
-  //}
 }

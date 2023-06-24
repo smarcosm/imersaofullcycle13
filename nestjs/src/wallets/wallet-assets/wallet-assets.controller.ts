@@ -22,14 +22,4 @@ export class WalletAssetsController {
       ...body,
     });
   }
-
-  // @Sse('events')
-  // events(@Param('wallet_id') wallet_id: string): Observable<MessageEvent> {
-  //   return this.walletAssetsService.subscribeEvents(wallet_id).pipe(
-  //     map((event) => ({
-  //       type: event.event,
-  //       data: event.data,
-  //     })),
-  //   );
-  // }
 }
