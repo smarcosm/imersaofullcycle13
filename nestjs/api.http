@@ -1,0 +1,23 @@
+###
+GET http://localhost:3000/
+
+###
+POST  http://localhost:3000/assets
+Content-Type: application/json
+
+  {
+    "id": "asset1",
+    "symbol": "B2",
+    "price": 5.5
+  }
+
+###
+GET http://localhost:3000/wallets
+
+###
+POST  http://localhost:3000/wallets
+Content-Type: application/json
+
+{
+  "id": "wallet1"
+}
