@@ -1,3 +1,4 @@
+import { Label, TextInput, Button } from "../components/flowbite-components";
 import { revalidateTag } from "next/cache";
 
 async function initTransaction(formData: FormData) {
@@ -7,57 +8,77 @@ async function initTransaction(formData: FormData) {
   const wallet_id = formData.get("wallet_id");
   const asset_id = formData.get("asset_id");
   const type = formData.get("type");
-  const response = await fetch(`https://localhost:8000/wallet/${wallet_id}/orders`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-    body: JSON.stringify({
-      shares,
-      price,
-      asset_id,
-      type,
-      status: "OPEN",
-      Asset: {
-        id: asset_id,
-        symbol: "PETR4",
-        price: 30,
+  
+  const response = await fetch(
+    `http://host.docker.internal:3000/wallets/${wallet_id}/orders`,
+    {
+      headers: {
+        "Content-Type": "application/json",
       },
-    }),
-  });
-  revalidateTag(`orders-wallet-${wallet_id}`)
-  console.log(response.status);
+      method: "POST",
+      body: JSON.stringify({
+        shares,
+        price,
+        asset_id,
+        type,
+        status: "OPEN",
+        Asset: {
+          id: asset_id,
+          symbol: "PETR4",
+          price: 30,
+        },
+      }),
+    }
+  );
+  revalidateTag(`orders-wallet-${wallet_id}`);
   return await response.json();
 }
 
-export default async function OrderForm(props: {
-  assset_id: string;
+export default function OrderForm(props: {
+  asset_id: string;
   wallet_id: string;
+  type: "BUY" | "SELL";
 }) {
   return (
     <div>
       <h1>Order Form</h1>
       <form action={initTransaction}>
-        <input name="asset_id" type="hidden" defaultValue={props.assset_id} />
+        <input name="asset_id" type="hidden" defaultValue={props.asset_id} />
         <input name="wallet_id" type="hidden" defaultValue={props.wallet_id} />
         <input name="type" type="hidden" defaultValue={"BUY"} />
-        <input
-          name="shares"
-          type="number"
-          min={1}
-          step={1}
-          placeholder="quantidade"
-        />
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="shares" value="Quantidade" />
+          </div>
+          <TextInput
+            id="shares"
+            name="shares"
+            required
+            type="number"
+            min={1}
+            step={1}
+            defaultValue={1}
+          />
+        </div>
         <br />
-        <input
-          name="price"
-          type="number"
-          min={1}
-          step={0.1}
-          placeholder="preço"
-        />
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="shares" value="Preço R$" />
+          </div>
+          <TextInput
+            id="price"
+            name="price"
+            required
+            type="number"
+            min={1}
+            step={1}
+            defaultValue={1}
+          />
+        </div>
         <br />
-        <button>Comprar</button>
+        <Button type="submit" color={props.type === "BUY" ? "green" : "red"}>
+          Confirmar {props.type === "BUY" ? "compra" : "venda"}
+        </Button>
       </form>
     </div>
   );
