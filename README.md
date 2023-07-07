@@ -50,6 +50,7 @@ Para povoar o banco de dados com simulações de preços de ativos e realizar a 
 
 1. No container do backend (NestJS), execute o comando `npm run command simulate-assets-price` para simular os preços dos ativos e transações de compra e venda, bem como as negociações abertas, pendentes e fechadas. Os dados serão enviados ao Kafka.
 2. O serviço em Golang consome os dados do Kafka, processa-os e envia as respostas de volta ao Kafka.
+3. O backend consome os dados do kafka e o torna disponível para o frontend consumir e mostrar para o usuário.
 
 ## Estrutura do Projeto
 
