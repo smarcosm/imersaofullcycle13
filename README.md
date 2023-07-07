@@ -34,7 +34,7 @@ Certifique-se de ter o Docker instalado em sua máquina antes de executar os com
 4. Execute o comando `go run cmd/trade/main.go` para iniciar o microserviço principal em Golang.
 5. Navegue até a pasta `nestjs`.
 6. Execute o comando `docker-compose up -d` para construir e iniciar os contêineres do backend e o serviço MongoDB.
-7 Após a inicialização bem-sucedida, acesse o container do backend com o comando `docker-compose exec app bash`.
+7. Após a inicialização bem-sucedida, acesse o container do backend com o comando `docker-compose exec app bash`.
 8. Dentro do container, execute o comando `npm run start:dev` para iniciar o servidor backend.
 
 9. Navegue até a pasta `nextjs`.
